@@ -23,6 +23,10 @@ Con el CLI de angular 7 instalado, ubicarse en la carpeta del proyecto, ejecutar
 
 # Capas de la aplicacion
 
+
+![Modelo de capas con MVC]( https://github.com/josedanielcruzc/obligaciones/blob/master/capas.png )
+
+
 Se utiliza un modelo de capas y un modelado MVC donde : 
 
 ## 1 Presentacion
