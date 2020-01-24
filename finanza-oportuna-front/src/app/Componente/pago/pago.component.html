@@ -1,0 +1,104 @@
+<div class="container">
+  <nav class="nav nav-pills flex-column flex-sm-row">
+
+    <a routerLink="/cliente" routerLinkActive="router-link-active" class="flex-sm-fill text-sm-center nav-link active">
+      <span> cliente</span>
+    </a>
+
+    <a routerLink="/obligacion" routerLinkActive="router-link-active"
+      class="flex-sm-fill text-sm-center nav-link active">
+      <span> obligacion</span>
+    </a>
+  </nav>
+
+  <div class="card " style="margin-bottom: 10px; margin-top: 10px;">
+
+    <div class="card-header" style="text-align: center;">
+      <h3>Agregar Pago</h3>
+    </div>
+    <div class="card-body ">
+      <form class="row" [formGroup]="registerForm">
+
+        <div class="form-group col-md-6 ">
+          <label for="banco">banco</label>
+          <select formControlName="banco" [ngClass]="{ 'is-invalid': submitted && f.banco.errors }" id="banco"
+            class="form-control">
+            <option selected>Seleccione...</option>
+            <option value="{{  tid.codigo }}" *ngFor="let tid of listaBanco">{{  tid.nombre }}</option>
+          </select>
+          <div *ngIf="submitted && f.banco.errors" class="invalid-feedback">
+            <div *ngIf="f.banco.errors.required">Requerido</div>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="valorPagado">valorPagado</label>
+          <input formControlName="valorPagado" [ngClass]="{ 'is-invalid': submitted && f.valorPagado.errors }"
+            id="valorPagado" type="text" class="form-control">
+          <div *ngIf="submitted && f.valorPagado.errors" class="invalid-feedback">
+            <div *ngIf="f.valorPagado.errors.required">Requerido</div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6 ">
+          <label for="periodoPagado">periodo Pagado</label>
+          <input formControlName="periodoPagado" [ngClass]="{ 'is-invalid': submitted && f.periodoPagado.errors }"
+            id="primerNombre" type="text" class="form-control">
+          <div *ngIf="submitted && f.periodoPagado.errors" class="invalid-feedback">
+            <div *ngIf="f.periodoPagado.errors.required">Requerido</div>
+          </div>
+        </div>
+
+
+        <div class="card-footer" style="text-align: center; width: 100%;">
+          <button class="btn btn-danger" (click)="guardarPago( $event, cliente )">Guardar</button>
+        </div>
+
+
+      </form>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  <div class="card">
+
+    <div class="car-header">
+      <h3>Pagos</h3>
+
+    </div>
+    <div class="card-body">
+
+      <table class="table table-hover">
+
+        <thead>
+          <th>cod</th>
+          <th>banco</th>
+          <th>fecha pago</th>
+          <th>valor pagado</th>
+          <th>periodo pagado</th>
+          <th>obligacion</th>
+        </thead>
+        <tbody>
+
+          <tr class="text-center" *ngFor="let pago of listaPagos">
+
+            <td>{{ pago.codigo }}</td>
+            <td>{{ pago.banco.nombre }}</td>
+            <td>{{ pago.fechaPagoString }}</td>
+            <td>{{ pago.valorPagado }}</td>
+            <td>{{ pago.periodoPagado }}</td>
+            <td>{{ pago.obligacion.codigo }}</td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.rectangle {
+    background: #e5592e;
+    height: 62px;
+    position: relative;
+    -moz-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.55);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.55);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    z-index: 500;
+    /* the stack order: foreground */
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+a.flex-sm-fill.text-sm-center.nav-link {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+button.btn{
+    margin: 10px;
+}
+
+button.btn.right{
+    float: right;
+}
+
+.top{
+    margin-top: 10px;
+}
+

@@ -1,0 +1,161 @@
+<div class="container">
+  <nav class="nav nav-pills flex-column flex-sm-row">
+    <a routerLink="/cliente" routerLinkActive="router-link-active" class="flex-sm-fill text-sm-center nav-link active">
+      <span> cliente</span>
+    </a>
+  </nav>
+
+  <div class="card top" *ngIf="mostrarTarjetaGuardar">
+
+    <div class="card-header" style="text-align: center;">
+      <h3>Obligacion</h3>
+    </div>
+    <div class="card-body ">
+      <form class="row" [formGroup]="registerForm">
+
+        <div class="form-group col-md-6 ">
+          <label for="descripcion">descripcion</label>
+
+          <input formControlName="descripcion" [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }"
+            id="descripcion" type="text" class="form-control">
+          <div *ngIf="submitted && f.descripcion.errors" class="invalid-feedback">
+            <div *ngIf="f.descripcion.errors.required">Requerido</div>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input form-control" formControlName="estado" id="estado">
+            <label class="custom-control-label" for="estado">Estado</label>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6 ">
+          <label for="nombre">nombre</label>
+          <input formControlName="nombre" [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }" id="nombre"
+            type="text" class="form-control">
+          <div *ngIf="submitted && f.nombre.errors" class="invalid-feedback">
+            <div *ngIf="f.nombre.errors.required">Requerido</div>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="numeroPeriodos">numero Periodos</label>
+          <input formControlName="numeroPeriodos" [ngClass]="{ 'is-invalid': submitted && f.numeroPeriodos.errors }"
+            id="numeroPeriodos" type="text" class="form-control">
+          <div *ngIf="submitted && f.numeroPeriodos.errors" class="invalid-feedback">
+            <div *ngIf="f.numeroPeriodos.errors.required">Requerido</div>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="periodoActual">periodo Actual</label>
+          <input formControlName="periodoActual" [ngClass]="{ 'is-invalid': submitted && f.periodoActual.errors }"
+            id="periodoActual" type="text" class="form-control">
+          <div *ngIf="submitted && f.periodoActual.errors" class="invalid-feedback">
+            <div *ngIf="f.periodoActual.errors.required">Requerido</div>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="valorPeriodoActual">valor Periodo Actual</label>
+          <input formControlName="valorPeriodoActual"
+            [ngClass]="{ 'is-invalid': submitted && f.valorPeriodoActual.errors }" id="valorPeriodoActual" type="text"
+            class="form-control">
+          <div *ngIf="submitted && f.valorPeriodoActual.errors" class="invalid-feedback">
+            <div *ngIf="f.valorPeriodoActual.errors.required">Requerido</div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="valorTotal">valor Total</label>
+          <input formControlName="valorTotal" [ngClass]="{ 'is-invalid': submitted && f.valorTotal.errors }"
+            id="valorTotal" type="text" class="form-control">
+          <div *ngIf="submitted && f.valorTotal.errors" class="invalid-feedback">
+            <div *ngIf="f.valorTotal.errors.required">Requerido</div>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="producto">producto</label>
+          <select formControlName="producto" [ngClass]="{ 'is-invalid': submitted && f.producto.errors }" id="producto"
+            class="form-control">
+            <option selected>Seleccione...</option>
+            <option value="{{  pro.codigo }}" *ngFor="let pro of listaProductoModel">{{  pro.producto }}</option>
+          </select>
+
+
+          <div *ngIf="submitted && f.producto.errors" class="invalid-feedback">
+            <div *ngIf="f.producto.errors.required">Requerido</div>
+          </div>
+        </div>
+
+        <div class="card-footer" style="text-align: center; width: 100%;">
+          <button class="btn btn-danger" (click)="guardarObligacion( $event )">Guardar</button>
+          <button class="btn btn-danger" (click)="cancelarGuardado( )">Cancelar</button>
+
+        </div>
+
+
+      </form>
+    </div>
+
+    <p>
+      Form value: {{ registerForm.value| json }}
+    </p>
+
+    <p>
+      Form Status: {{ registerForm.status }}
+    </p>
+
+  </div>
+
+
+
+  <div class="card top" *ngIf="!mostrarTarjetaGuardar">
+
+    <div class="car-header">
+      <h3>Obligaciones</h3>
+      <button class="btn btn-primary right" (click)="agregarObligacion();"><i class="material-icons">add</i></button>
+    </div>
+    <div class="card-body">
+
+      <table class="table table-hover table-responsive table-condensed ">
+
+        <thead>
+          <th>cod</th>
+          <th>nombre</th>
+          <th>descripcion</th>
+          <th>valor total</th>
+          <th>valor periodo actual</th>
+          <th>periodos</th>
+          <th>periodo actual</th>
+          <th>estado</th>
+          <th>producto</th>
+          <th>cliente</th>
+          <th>editar</th>
+          <th>pagos</th>
+        </thead>
+        <tbody>
+
+          <tr class="text-center  {{ obligacion.estado == 'PAGADO' ? 'table-success': '' }}" *ngFor="let obligacion of listaObligacions">
+
+            <td>{{ obligacion.codigo }}</td>
+            <td>{{ obligacion.nombre }}</td>
+            <td>{{ obligacion.descripcion }}</td>
+            <td>{{ obligacion.valorTotal }}</td>
+            <td>{{ obligacion.valorPeriodoActual }}</td>
+            <td>{{ obligacion.numeroPeriodos }}</td>
+            <td>{{ obligacion.periodoActual }}</td>
+            <td>{{ obligacion.estado }}</td>
+            <td>{{ obligacion.producto.producto }}</td>
+            <td> {{ obligacion.cliente.tipoDocumento.prefijo }}-{{ obligacion.cliente.identificacion }} </td>
+            <td> <button class="btn btn-warning" (click)="obligacionSeleccionada($event, obligacion, 'editar');">
+              <i class="material-icons">edit</i></button></td>
+            <td> <button class="btn btn-danger" (click)="obligacionSeleccionada($event, obligacion, 'pagos');">
+              <i class="material-icons"> format_line_spacing</i></button> </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

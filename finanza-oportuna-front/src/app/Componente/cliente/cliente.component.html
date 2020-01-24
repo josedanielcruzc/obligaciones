@@ -1,0 +1,142 @@
+<div class="container">
+
+  <div class="card top" *ngIf="mostrarTarjetaGuardar">
+
+    <div class="card-header">
+      <h3>Cliente</h3>
+    </div>
+    <div class="card-body ">
+      <form class="row" [formGroup]="registerForm">
+
+        <div class="form-group col-md-6 ">
+          <label for="tipoDocumento">tipoDocumento</label>
+          <select formControlName="tipoDocumento" [ngClass]="{ 'is-invalid': submitted && f.tipoDocumento.errors }"
+            id="tipoDocumento" class="form-control" (ngModelChange)="cambioTipoDocumento($event)" >
+            <option selected>Seleccione...</option>
+            <option value="{{  tid.codigo }}" *ngFor="let tid of listaTipoDocumento">{{  tid.prefijo }}</option>
+          </select>
+          <div *ngIf="submitted && f.tipoDocumento.errors" class="invalid-feedback">
+            <div *ngIf="f.tipoDocumento.errors.required">Requerido</div>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="documento">documento</label>
+          <input formControlName="documento" [ngClass]="{ 'is-invalid': submitted && f.documento.errors }"
+            id="documento" type="text" class="form-control">
+          <div *ngIf="submitted && f.documento.errors" class="invalid-feedback">
+            <div *ngIf="f.documento.errors.required">Requerido</div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6 " *ngIf="!mostrarCamposNit">
+          <label for="primerNombre">Primer Nombre</label>
+          <input formControlName="primerNombre" [ngClass]="{ 'is-invalid': submitted && f.primerNombre.errors }"
+            id="primerNombre" type="text" class="form-control">
+          <div *ngIf="submitted && f.primerNombre.errors" class="invalid-feedback">
+            <div *ngIf="f.primerNombre.errors.required">Requerido</div>
+          </div>
+        </div>
+        <div class="form-group col-md-6" *ngIf="!mostrarCamposNit">
+          <label for="segundoNombre">Segundo Nombre</label>
+          <input formControlName="segundoNombre" id="segundoNombre" type="text" class="form-control">
+        </div>
+        <div class="form-group col-md-6" *ngIf="!mostrarCamposNit">
+          <label for="primerApellido">Primer Apellido</label>
+          <input formControlName="primerApellido" [ngClass]="{ 'is-invalid': submitted && f.primerApellido.errors }"
+            id="primerApellido" type="text" class="form-control">
+          <div *ngIf="submitted && f.primerApellido.errors" class="invalid-feedback">
+            <div *ngIf="f.primerApellido.errors.required">Requerido</div>
+          </div>
+        </div>
+        <div class="form-group col-md-6" *ngIf="!mostrarCamposNit">
+          <label for="segundoApellido">Segundo Apellido</label>
+          <input formControlName="segundoApellido" id="segundoApellido" type="text" class="form-control">
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="direccion">direccion</label>
+          <input formControlName="direccion" id="direccion" type="text" class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="telefono">telefono</label>
+          <input formControlName="telefono" id="telefono" type="text" class="form-control">
+        </div>
+
+        <div class="form-group col-md-6" *ngIf="mostrarCamposNit">
+          <label for="razonsoc">razon social</label>
+          <input formControlName="razonsoc" id="razonsoc" type="text" class="form-control">
+        </div>
+
+        <div class="card-footer" style="text-align: center; width: 100%;">
+          <button class="btn btn-danger " (click)="guardarCliente( $event )">Guardar</button>
+          <button class="btn btn-danger " (click)="cancelarGuardado( )">Cancelar</button>
+        </div>
+
+
+      </form>
+    </div>
+
+
+    <p>
+      Form value: {{ registerForm.value| json }}
+    </p>
+
+    <p>
+      Form Status: {{ registerForm.status }}
+    </p>
+
+  </div>
+
+  <div class="card top" *ngIf="!mostrarTarjetaGuardar">
+
+    <div class="car-header">
+      <h3>Clientes</h3>
+      <button class="btn btn-primary right" (click)="agregarCliente();"><i class="material-icons">add</i></button>
+    </div>
+    <div class="card-body">
+
+      <table class="table table-hover table-responsive table-condensed ">
+
+        <thead>
+          <th>cod</th>
+          <th>tipo doc</th>
+          <th>identificacion</th>
+          <th>p nombre</th>
+          <th>s nombre</th>
+          <th>p apellido</th>
+          <th>s apellido</th>
+          <th>razon social</th>
+          <th>diereccion</th>
+          <th>telefono</th>
+          <th>editar</th>
+          <th>obligaciones</th>
+        </thead>
+        <tbody>
+
+          <tr class="text-center" *ngFor="let cliente of listaClientes">
+
+            <td>{{cliente.codigo}}</td>
+            <td>{{cliente.tipoDocumento.prefijo}}</td>
+            <td>{{cliente.identificacion}}</td>
+            <td>{{cliente.primerNombre}}</td>
+            <td>{{cliente.segundoNombre}}</td>
+            <td>{{cliente.primerApellido}}</td>
+            <td>{{cliente.segundoApellido}}</td>
+            <td>{{cliente.razonSocial}}</td>
+            <td>{{cliente.direccion}}</td>
+            <td>{{cliente.telefono}}</td>
+            <td> <button class="btn btn-warning" (click)="clienteSeleccionado($event, cliente, 'editar');"><i
+                  class="material-icons">edit</i></button></td>
+            <td> <button class="btn btn-danger" (click)="clienteSeleccionado($event, cliente, 'obligaciones');"><i
+                  class="material-icons"> format_line_spacing</i></button> </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
