@@ -1,6 +1,9 @@
 # obligaciones
 
 ### BD - PostgreSQL
+
+![Modelo ER]( https://github.com/josedanielcruzc/obligaciones/blob/master/ModeloER.png )
+
 ### Presentacion en Angular 7 , Html, bootstrap
 ### Construccion Maven
 ### Backend Spring Boot
